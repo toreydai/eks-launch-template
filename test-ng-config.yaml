@@ -1,0 +1,16 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: containerd
+  region: cn-northwest-1
+
+managedNodeGroups:
+  - name: test
+    minSize: 1
+    maxSize: 4
+    desiredCapacity: 2
+    privateNetworking: true
+    launchTemplate:
+      id: lt-03a1f4c65ba59be72
+      version: "2"

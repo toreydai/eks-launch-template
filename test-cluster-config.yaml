@@ -1,0 +1,35 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: ${CLUSTER_NAME}
+  region: ${AWS_REGION}
+  version: "1.21"
+
+vpc:
+  id: ${VPC_ID}
+  cidr: ${VPC_CIDR}
+  subnets:
+    public:
+      public-01: 
+        id: ${PUBLIC_01}
+      public-02:
+        id: ${PUBLIC_02}
+    private:
+      private-01:
+        id: ${PRIVATE_01}
+      private-02:
+        id: ${PRIVATE_02}
+
+managedNodeGroups:
+  - name: demo
+    instanceType: $INSTANCE_TYPE
+    minSize: 1
+    maxSize: 3
+    desiredCapacity: 1
+    volumeSize: 50
+    volumeType: gp3
+    privateNetworking: true
+    ssh:
+      allow: true
+      publicKeyName: $KEY_PAIR
