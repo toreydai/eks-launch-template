@@ -211,11 +211,9 @@ sudo sed -i '$a\'"$result"'' /etc/fstab
 
 /etc/eks/bootstrap.sh containerd --container-runtime containerd
 
-sudo mkdir /data/root
-sudo mkdir /data/state
-
+sudo mkdir /data/containerd
 sudo sed -i "s#/var/lib#/data/root#g" /etc/containerd/config.toml
-sudo sed -i "s#/run#/data/state#g" /etc/containerd/config.toml
+
 ```
 最后，点击“创建模板版本”，例如设置为版本“2”
 
@@ -274,7 +272,7 @@ EOF
 3.3 从启动模板创建节点组
 
 ```
-eksctl create ng -config-file=test-ng-config.yaml
+eksctl create ng --config-file=test-ng-config.yaml
 ```
 ### 4、删除旧的节点组
 
